@@ -1,134 +1,121 @@
-@import "tailwindcss";
-
-/* ---------------------------------------------------------
-   Theme tokens — Tailwind v4 CSS Theme Architecture
---------------------------------------------------------- */
-@theme {
-  --color-marsRed: #ff3300;
-  --color-marsRed-dark: #cc2900;
-  --color-marsRed-bright: #ff5533;
-  --color-neonCyan: #00f0ff;
-  --color-obsidian: #0b0b14;
-  --color-deepSpace: #05050a;
-  --color-spaceCard: #0d0d16;
-  --color-spaceSurface: #141422;
-  --color-spaceBorder: #1f1f33;
-
-  --font-sans: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
-  --font-mono: var(--font-mono), ui-monospace, SFMono-Regular, monospace;
-}
+/* app/globals.css - Cinematic Cosmic CRT & Analog Horror theme
+   Deep cosmic gradient background, glassmorphism cards, neon accents,
+   CRT/scanline TV frame, and utility classes for the Red Planet aesthetic.
+*/
 
 :root {
-  --foreground-rgb: 255, 255, 255;
-  --background-start-rgb: 5, 5, 10;
-  --background-end-rgb: 11, 11, 20;
-  color-scheme: dark;
+  --bg-1: #04060b;
+  --bg-2: #080e1a;
+  --accent-magenta: #ff0055;
+  --accent-amber: #ffb700;
+  --accent-emerald: #00ff66;
+  --accent-cyan: #00f3ff;
+  --accent-violet: #7928ca;
+  --glass-border: rgba(0, 243, 255, 0.15);
+  --card-bg: rgba(10,12,18,0.55);
+  --card-glow: rgba(157,0,255,0.08);
+  --text: #e8fbff;
 }
 
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
-  font-family: var(--font-sans);
-  overflow-x: hidden;
-  min-h-screen: 100vh;
+html, body, #__next {
+  height: 100%;
+  background: radial-gradient(1200px 600px at 10% 10%, rgba(121,40,202,0.06), transparent 8%), linear-gradient(180deg, var(--bg-1) 0%, var(--bg-2) 100%);
+  color: var(--text);
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
   -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-/* ---------------------------------------------------------
-   Custom Tesla & Apple Grade Scrollbars
---------------------------------------------------------- */
-::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
-}
-::-webkit-scrollbar-track {
-  background: #05050a;
-}
-::-webkit-scrollbar-thumb {
-  background: var(--color-marsRed);
-  border-radius: 3px;
-}
-::-webkit-scrollbar-thumb:hover {
-  background: var(--color-neonCyan);
+/* Global link styles */
+a { color: var(--accent-cyan); text-decoration: underline; }
+
+/* Glassmorphism card */
+.app-card {
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+  border-radius: 14px;
+  padding: 18px;
+  box-shadow: 0 8px 30px rgba(9,12,20,0.7), 0 2px 6px rgba(0,243,255,0.03);
+  border: 1px solid var(--glass-border);
+  backdrop-filter: blur(8px) saturate(120%);
 }
 
-/* Firefox scrollbar fallback */
-* {
-  scrollbar-width: thin;
-  scrollbar-color: var(--color-marsRed) #05050a;
+/* Navbar */
+.navbar {
+  display:flex;
+  gap:12px;
+  align-items:center;
+  padding:12px 16px;
+  border-radius: 12px;
+}
+.nav-link {
+  padding:8px 12px;
+  border-radius:10px;
+  color:var(--text);
+  background: linear-gradient(90deg, rgba(121,40,202,0.06), rgba(0,243,255,0.02));
+  border:1px solid rgba(0,243,255,0.03);
+  font-weight:600;
 }
 
-/* ---------------------------------------------------------
-   Holographic Glow, Glass & Telemetry Utilities
---------------------------------------------------------- */
-.glow-mars {
-  box-shadow: 0 0 30px rgba(255, 51, 0, 0.35);
-}
-.glow-mars-lg {
-  box-shadow: 0 0 60px rgba(255, 51, 0, 0.45), 0 0 20px rgba(255, 51, 0, 0.3);
-}
-.glow-cyan {
-  box-shadow: 0 0 30px rgba(0, 240, 255, 0.35);
-}
-.glow-cyan-lg {
-  box-shadow: 0 0 60px rgba(0, 240, 255, 0.45), 0 0 20px rgba(0, 240, 255, 0.3);
+/* Metrics & badges */
+.metric-badge {
+  display:inline-block;
+  padding:6px 10px;
+  border-radius:10px;
+  background: linear-gradient(90deg, rgba(0,255,102,0.06), rgba(255,183,0,0.02));
+  color:var(--text);
+  border: 1px solid rgba(0,255,102,0.06);
+  box-shadow: 0 6px 18px rgba(157,0,255,0.04);
 }
 
-.glass-panel {
-  background: rgba(11, 11, 20, 0.75);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+/* CRT TV frame with scanlines & subtle vignette */
+.tv-frame {
+  position: relative;
+  border-radius: 10px;
+  padding: 10px;
+  background: linear-gradient(180deg, rgba(8,12,20,0.9), rgba(0,0,0,0.6));
+  border: 1px solid rgba(121,40,202,0.08);
+  box-shadow: 0 12px 40px rgba(0,0,0,0.6), 0 0 30px rgba(0,243,255,0.02) inset;
+  overflow: hidden;
 }
 
-.glass-panel-strong {
-  background: rgba(11, 11, 20, 0.9);
-  backdrop-filter: blur(24px);
-  -webkit-backdrop-filter: blur(24px);
-  border: 1px solid rgba(255, 51, 0, 0.2);
+.tv-screen {
+  background: radial-gradient(circle at 30% 10%, rgba(0,243,255,0.02), transparent 8%), linear-gradient(180deg, rgba(10,12,18,0.75), rgba(6,8,12,0.6));
+  border-radius: 6px;
+  padding: 18px;
+  color: var(--accent-amber);
+  min-height: 220px;
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,0.02);
 }
 
-.glass-panel-hover {
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-.glass-panel-hover:hover {
-  background: rgba(20, 20, 34, 0.85);
-  border-color: rgba(255, 51, 0, 0.4);
-  box-shadow: 0 0 30px rgba(255, 51, 0, 0.25);
-}
-
-/* ---------------------------------------------------------
-   Cinematic Animations & Radar Pulsing
---------------------------------------------------------- */
-@keyframes radarSpin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+/* scanlines overlay */
+.tv-screen:before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: linear-gradient(rgba(0,0,0,0.06) 50%, rgba(255,255,255,0.02) 51%);
+  background-size: 100% 4px;
+  pointer-events: none;
+  mix-blend-mode: multiply;
+  opacity: 0.85;
 }
 
-@keyframes telemetryFloat {
-  0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-6px); }
-}
+/* subtle flicker animation */
+@keyframes crt-flicker { 0% { opacity:1 } 50% { opacity:0.98 } 100% { opacity:1 } }
+.tv-screen { animation: crt-flicker 3s ease-in-out infinite; }
 
-.animate-radar {
-  animation: radarSpin 12s linear infinite;
-}
+/* glowing title */
+.tv-title { color: var(--accent-violet); font-weight:700; text-shadow: 0 2px 12px rgba(121,40,202,0.45), 0 0 6px rgba(0,243,255,0.08); }
 
-.animate-telemetry-float {
-  animation: telemetryFloat 6s ease-in-out infinite;
-}
+/* ticker */
+.ticker-wrap { background: rgba(0,0,0,0.35); padding: 8px 12px; border-radius: 6px; border: 1px solid rgba(255,183,0,0.04); }
+.ticker-line { color: var(--accent-amber); font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, monospace; white-space: nowrap; overflow: hidden; }
+.ticker-scroll { display:inline-block; padding-left: 100%; animation: ticker 24s linear infinite; }
+@keyframes ticker { from { transform: translateX(0%); } to { transform: translateX(-100%); } }
 
-/* Reduced motion support */
-@media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-    scroll-behavior: auto !important;
-  }
-}
+/* utility responsive */
+.container-wide { max-width: 1200px; margin: 0 auto; padding: 24px; }
+
+/* footer subtle */
+.footer { color: rgba(255,255,255,0.45); font-size: 13px; }
